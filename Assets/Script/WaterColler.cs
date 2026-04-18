@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class WaterColler : MonoBehaviour
 {
-    public OverHeatBar slider;
+    public OverHeatBar overHeatBar;
+    private bool isPlayerInside = false;
+    private float timer = 0f;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            if (slider.timer >= 1f)
+            isPlayerInside = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerInside = false;
+        }
+    }
+
+    void Update()
+    {
+        if (isPlayerInside)
+        {
+
+            timer += Time.deltaTime;
+
+            if (timer >= 1f)
             {
-                slider.slider.value -= 2f;
-                slider.timer = 0f;
+                overHeatBar.slider.value -= 2f; // ลดทีละ 2
+                timer = 0f;
             }
         }
     }

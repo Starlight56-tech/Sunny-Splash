@@ -6,7 +6,7 @@ public class OverHeatBar : MonoBehaviour
 {
     public Slider slider;
     public float maxValue = 100f;
-
+    public WaterColler waterColler;
     public float timer = 0f;
 
     void Start()
